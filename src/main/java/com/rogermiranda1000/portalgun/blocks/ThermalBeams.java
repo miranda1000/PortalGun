@@ -21,6 +21,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ThermalBeams extends CustomBlock<ThermalBeam> {
@@ -28,14 +29,13 @@ public class ThermalBeams extends CustomBlock<ThermalBeam> {
         public StoreThermalBeam() {}
 
         @Override
-        public Function<ThermalBeam, BasicLocation> storeName() {
-            return in->new BasicLocation(in.getPosition());
+        public BiFunction<ThermalBeam, Location, BasicLocation> storeName() {
+            return (in,loc)->new BasicLocation(loc);
         }
 
         @Override
-        public Function<BasicLocation, ThermalBeam> loadName() {
-            return (in) -> {
-                Location loc = in.getLocation();
+        public BiFunction<BasicLocation, Location, ThermalBeam> loadName() {
+            return (in,loc) -> {
                 Vector facing = new Vector(1,0,0);
                 try {
                     Block block = loc.getWorld().getBlockAt(loc);
