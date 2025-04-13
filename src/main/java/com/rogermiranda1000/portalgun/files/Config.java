@@ -13,6 +13,7 @@ import com.rogermiranda1000.portalgun.blocks.decorators.ThermalBeamDecorator;
 import com.rogermiranda1000.portalgun.blocks.decorators.ThermalReceiverDecorator;
 import com.rogermiranda1000.portalgun.cubes.CompanionCube;
 import com.rogermiranda1000.portalgun.cubes.RedirectionCube;
+import com.rogermiranda1000.portalgun.events.onMove;
 import com.rogermiranda1000.portalgun.events.onPlayerJoin;
 import com.rogermiranda1000.portalgun.events.onPortalgunEntity;
 import com.rogermiranda1000.portalgun.events.onUse;
@@ -56,10 +57,10 @@ public class Config {
         public boolean removeOnLeave = true;
 
         @Comment("Sound to be used when placing a portal.")
-        public Sound createSound = Sound.valueOf(Config.getDefaultCreateSound());
+        public String createSound = Config.getDefaultCreateSound();
 
         @Comment("Sound to be used when using a portal.")
-        public Sound teleportSound = Sound.valueOf(Config.getDefaultTeleportSound());
+        public String teleportSound = Config.getDefaultTeleportSound();
         @Comment("Max distance where a player can place a portal.")
         public float placementLength = 80;
 
@@ -219,7 +220,18 @@ public class Config {
             Language.loadHashMap(Config.getInstance().language);
 
             onUse.MAX_LENGTH = (int) Config.getInstance().portals.placementLength;
-            onUse.CREATE_SOUND = Config.getInstance().portals.createSound;
+            try {
+                onUse.CREATE_SOUND = Sound.valueOf(Config.getInstance().portals.createSound);
+            } catch (IllegalArgumentException ex) {
+                PortalGun.plugin.getLogger().warning("Sound '" + Config.getInstance().portals.createSound + "' doesn't exist; using the default one instead");
+                onUse.CREATE_SOUND = Sound.valueOf(Config.getDefaultCreateSound());
+            }
+            try {
+                onMove.TELEPORT_SOUND = Sound.valueOf(Config.getInstance().portals.teleportSound);
+            } catch (IllegalArgumentException ex) {
+                PortalGun.plugin.getLogger().warning("Sound '" + Config.getInstance().portals.createSound + "' doesn't exist; using the default one instead");
+                onMove.TELEPORT_SOUND = Sound.valueOf(Config.getDefaultTeleportSound());
+            }
 
             loadPortalParticles();
             loadRestarterParticles();
