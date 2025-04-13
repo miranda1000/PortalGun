@@ -114,6 +114,8 @@ public enum Language {
             Language.createLanguageFile("polish");
             Language.createLanguageFile("czech");
             Language.createLanguageFile("german");
+            Language.createLanguageFile("russian");
+            Language.createLanguageFile("ukrainian");
         }
     }
 
@@ -123,7 +125,8 @@ public enum Language {
      */
     public static boolean createLanguageFile(String language) {
         if (!language.equalsIgnoreCase("english") && !language.equalsIgnoreCase("spanish") && !language.equalsIgnoreCase("catalan")
-                && !language.equalsIgnoreCase("polish") && !language.equalsIgnoreCase("czech") && !language.equalsIgnoreCase("german"))
+                && !language.equalsIgnoreCase("polish") && !language.equalsIgnoreCase("czech") && !language.equalsIgnoreCase("german")
+                && !language.equalsIgnoreCase("russian") && !language.equalsIgnoreCase("ukrainian"))
             return false;
 
         final YamlConfiguration lang = new YamlConfiguration();
@@ -137,6 +140,8 @@ public enum Language {
             else if (language.equalsIgnoreCase("polish")) Language.addValues(lang, Language.getPolishFile());
             else if (language.equalsIgnoreCase("czech")) Language.addValues(lang, Language.getCzechFile());
             else if (language.equalsIgnoreCase("german")) Language.addValues(lang, Language.getGermanFile());
+            else if (language.equalsIgnoreCase("russian")) Language.addValues(lang, Language.getRussianFile());
+            else if (language.equalsIgnoreCase("ukrainian")) Language.addValues(lang, Language.getUkrainianFile());
 
             lang.save(languageFile);
         } catch(Exception e){
@@ -372,6 +377,84 @@ public enum Language {
 
         r.put(Language.HELP_COMPANION.key, "Erzeuge einen Gefährtenwürfel.");
         r.put(Language.ERROR_WORLD.key, "Die [world]-Welt wurde nicht gefunden.");
+
+        return r;
+    }
+
+    private static HashMap<String, Object> getRussianFile() {
+        HashMap<String, Object> r = new HashMap<>();
+
+        r.put(Language.PORTAL_DENIED.key, "Вы не можете открыть портал здесь.");
+        r.put(Language.USER_NO_PERMISSIONS.key, "У Вас не прав на использования этого!");
+        r.put(Language.PORTAL_OPENED.key, "[player] открыл портал на [pos].");
+        r.put(Language.USER_NO_PORTALS.key, "У Вас нет открытых порталов на данный момент.");
+        r.put(Language.PORTAL_COLLIDING.key, "Вы не можете разместить порталы на одном и том же блоке!");
+        r.put(Language.PORTAL_FAR.key, "Невозможно поставить портал, блок находиться слишком далеко.");
+        r.put(Language.USER_REMOVE.key, "Вы успешно удалили свои порталы.");
+        r.put(Language.OTHER_USER_REMOVE.key, "[player] удалил(а) ваши порталы.");
+        r.put(Language.USER_REMOVE_OTHERS.key, "Вы удалили порталы [player].");
+        r.put(Language.OTHER_USER_NO_PORTALS.key, "[player] не имеет открытых порталов.");
+        r.put(Language.USER_DEATH.key, "Ваши порталы были удалены из-за Вашей смерти.");
+        r.put(Language.USER_REMOVE_ALL.key, "Вы удалили все порталы.");
+        r.put(Language.USER_GET_GUN.key, "Портальная пушка полученна!");
+        r.put(Language.USER_GET_BOOTS.key, "Сапоги прыгуна выданы!");
+        r.put(Language.USER_GET_EMANCIPATOR.key, "Блок анти-экспропреации выдан! Поместите один и другой сверху, чтобы создать поле анти-экпропреации.");
+        r.put(Language.HELP_GET_GUN.key, "Получить портальную пушку.");
+        r.put(Language.HELP_GET_BOOTS.key, "Получить сапоги прыгуна(Рессоры)(Отключают урон от падения).");
+        r.put(Language.HELP_GET_EMANCIPATOR.key, "Получить блок поля анти-экспропреации.");
+        r.put(Language.HELP_REMOVE.key, "Удалить ТВОИ активные порталы.");
+        r.put(Language.HELP_REMOVE_OTHERS.key, "Удалить чужие активные порталы.");
+        r.put(Language.HELP_REMOVE_ALL.key, "Удалить все активные порталы, включая чужие.");
+        r.put(Language.HELP_COMPANION.key, "Создать куб-компаньон.");
+        r.put(Language.HELP_REPORT.key, "Отправить информацию о проблеме. В зоне 'contact' укажите свой адрес електронной почты или никнейм Discord, чтобы я(разработчик плагина) мог с Вами связаться(если Вы не хотите указывать '-')");
+        r.put(Language.USER_NOT_FOUND.key, "[player] не найден.");
+        r.put(Language.ERROR_UNKNOWN.key, "Неизвестная команда.");
+        r.put(Language.ERROR_WORLD.key, "Невозможно найти мир [world].");
+        r.put(Language.REPORT_SENT.key, "Отчёт отправлен! Спасибо за помощь.");
+        r.put(Language.REPORT_CONTACT_ERROR.key, "Вам нужно указать адрес електронной почты(something@website) или Discord (user#id) чтобы связаться. Если не хотите связываться, тогда укажите '-'.");
+
+        r.put(Language.HELP_REDIRECTION.key, "Создать куб преломления подавленности.");
+        r.put(Language.HELP_GET_THERMAL_BEAM.key, "Получить Термический луч подавленности.");
+        r.put(Language.HELP_GET_THERMAL_RECEIVER.key, "Получить приёмник Термического луча подавленности.");
+
+        return r;
+    }
+
+    private static HashMap<String, Object> getUkrainianFile() {
+        HashMap<String, Object> r = new HashMap<>();
+
+        r.put(Language.PORTAL_DENIED.key, "Ви не можете відкрити портал у цьому місці.");
+        r.put(Language.USER_NO_PERMISSIONS.key, "У Вас нема прав на використання цього!");
+        r.put(Language.PORTAL_OPENED.key, "[player] відкрив портал на [pos].");
+        r.put(Language.USER_NO_PORTALS.key, "У Вас нема відкритих порталів на даний момент.");
+        r.put(Language.PORTAL_COLLIDING.key, "Ви не можете розмістити портали на одному и тому ж самому блоці!");
+        r.put(Language.PORTAL_FAR.key, "Неможливо поставити портал, блок знаходиться занадто далеко.");
+        r.put(Language.USER_REMOVE.key, "Вы успішно видалили свої портали.");
+        r.put(Language.OTHER_USER_REMOVE.key, "[player] видалив(ла) ваші портали.");
+        r.put(Language.USER_REMOVE_OTHERS.key, "Ви видалили портали [player].");
+        r.put(Language.OTHER_USER_NO_PORTALS.key, "[player] не має відкритих порталів.");
+        r.put(Language.USER_DEATH.key, "Ваші портали были видалені через Вашу загибель.");
+        r.put(Language.USER_REMOVE_ALL.key, "Ви видалили усі портали.");
+        r.put(Language.USER_GET_GUN.key, "Портальна пушка отримана!");
+        r.put(Language.USER_GET_BOOTS.key, "Чоботи стрибуна видані!");
+        r.put(Language.USER_GET_EMANCIPATOR.key, "Блок анті-експропреації виданий! Помістіть один і інший зверху, щоб створити поле анті-експропреації.");
+        r.put(Language.HELP_GET_GUN.key, "Отримати портальну пушку.");
+        r.put(Language.HELP_GET_BOOTS.key, "Отримати чоботи стрибуна(Ресори)(Відключають дамаг від падіння)");
+        r.put(Language.HELP_GET_EMANCIPATOR.key, "Отримати блок поля анті-експропреації.");
+        r.put(Language.HELP_REMOVE.key, "Видалити ТВОЇ активні портали.");
+        r.put(Language.HELP_REMOVE_OTHERS.key, "Видалити чужі активні портали.");
+        r.put(Language.HELP_REMOVE_ALL.key, "Видалити усі активні портали, включаючи чужі.");
+        r.put(Language.HELP_COMPANION.key, "Створити куб-компаньон.");
+        r.put(Language.HELP_REPORT.key, "Надіслати інформацію про проблему. У зоні 'contact' вкажіть свою адресу електронної пошти або нікнейм Discord, щоб я(розробник плагіна) міг з Вами зв'язатися(якщо Ви не хочете вказувати '-')");
+        r.put(Language.USER_NOT_FOUND.key, "[player] не знайдений.");
+        r.put(Language.ERROR_UNKNOWN.key, "Невідома команда.");
+        r.put(Language.ERROR_WORLD.key, "Неможливо знайти світ [world].");
+        r.put(Language.REPORT_SENT.key, "Звіт надіслано! спасибі за допомогу.");
+        r.put(Language.REPORT_CONTACT_ERROR.key, "Вам потрібно вказати адресу електронної пошти (something@website) або Discord (user#id) щоб зв'язатися. Якщо не хочете зв'язуватись, тоді вкажіть '-'.");
+
+        r.put(Language.HELP_REDIRECTION.key, "Створити куб заломлення подавленності.");
+        r.put(Language.HELP_GET_THERMAL_BEAM.key, "Отримати Термічний луч подавленності.");
+        r.put(Language.HELP_GET_THERMAL_RECEIVER.key, "Отримати приймач Термічного променя подавленності.");
 
         return r;
     }
