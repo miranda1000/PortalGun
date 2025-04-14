@@ -22,6 +22,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ThermalReceivers extends CustomBlock<ThermalReceiver> {
@@ -29,14 +30,13 @@ public class ThermalReceivers extends CustomBlock<ThermalReceiver> {
         public StoreThermalReceiver() {}
 
         @Override
-        public Function<ThermalReceiver, BasicLocation> storeName() {
-            return in->new BasicLocation(in.getPosition());
+        public BiFunction<ThermalReceiver, Location, BasicLocation> storeName() {
+            return (in,loc)->new BasicLocation(in.getPosition());
         }
 
         @Override
-        public Function<BasicLocation, ThermalReceiver> loadName() {
-            return (in) -> {
-                Location loc = in.getLocation();
+        public BiFunction<BasicLocation, Location, ThermalReceiver> loadName() {
+            return (in,loc) -> {
                 Vector facing = new Vector(1,0,0);
                 try {
                     Block block = loc.getWorld().getBlockAt(loc);

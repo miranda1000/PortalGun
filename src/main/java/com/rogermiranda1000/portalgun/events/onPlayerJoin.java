@@ -46,7 +46,9 @@ public class onPlayerJoin implements Listener {
      * 12       1.19.3
      * 13       1.19.4
      * 15       1.20-1.20.1
-     * 18       1.20.2
+     * 18       1.20.2-1.21.3
+     * 46       1.21.4
+     * 55       1.21.5-current
      * @author <a href="https://minecraft.fandom.com/wiki/Pack_format">Minecraft pack_format</a>
      * @return pack_format
      */
@@ -63,7 +65,9 @@ public class onPlayerJoin implements Listener {
         else if (VersionController.version.compareTo(Version.MC_1_19_4) < 0) return 12; // 1.19.3
         else if (VersionController.version.compareTo(Version.MC_1_20) < 0) return 13; // 1.19.4
         else if (VersionController.version.compareTo(new Version(1,20,2)) < 0) return 15; // between 1.20 and 1.20.1
-        else return 18; // Version >= 1.20.2
+        else if (VersionController.version.compareTo(new Version(1,21,4)) < 0) return 18; // between 1.20.2 and 1.21.3
+        else if (VersionController.version.compareTo(new Version(1,21,5)) < 0) return 46; // 1.21.4
+        else return 55; // Version >= 1.21.5
     }
 
     @EventHandler

@@ -8,6 +8,7 @@ import com.rogermiranda1000.portalgun.portals.WallPortal;
 
 import com.rogermiranda1000.versioncontroller.entities.EntityWrapper;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +17,7 @@ import org.bukkit.util.Vector;
 
 public class onMove implements Listener {
     private final onEmancipator emancipatorGridEvent;
+    public static Sound TELEPORT_SOUND;
 
     public onMove(onEmancipator emancipatorGridEvent) {
         this.emancipatorGridEvent = emancipatorGridEvent;
@@ -43,7 +45,6 @@ public class onMove implements Listener {
         if (Config.getInstance().portals.useOnlyYours && !player.equals(portal.getOwner())) return;
 
         Location destiny = portal.getDestiny(portal.getLocationIndex(loc));
-        // TODO: player velocity??
         if (portal instanceof WallPortal) {
             double approachVelocitySquare = delta.dot(portal.getApproachVector());
             if(approachVelocitySquare <= 0.f) return; // not approaching
@@ -63,7 +64,7 @@ public class onMove implements Listener {
             synchronized (PortalGun.teleportedEntities) {
                 PortalGun.teleportedEntities.put(player, destiny);
             }
-            player.playSound(player.getLocation(), Config.getInstance().portals.teleportSound, 3.0F, 0.5F);
+            player.playSound(player.getLocation(), onMove.TELEPORT_SOUND, 3.0F, 0.5F);
         }
     }
 }

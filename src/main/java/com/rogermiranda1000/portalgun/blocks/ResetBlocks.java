@@ -2,6 +2,7 @@ package com.rogermiranda1000.portalgun.blocks;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import com.github.davidmoten.rtreemulti.Entry;
@@ -34,13 +35,13 @@ public class ResetBlocks extends CustomBlock<ResetBlock> implements Listener {
         public StoreResetBlock() {}
 
         @Override
-        public Function<ResetBlock, BasicLocation> storeName() {
-            return in->new BasicLocation(in.getPosition());
+        public BiFunction<ResetBlock, Location, BasicLocation> storeName() {
+            return (in,loc)->new BasicLocation(loc);
         }
 
         @Override
-        public Function<BasicLocation, ResetBlock> loadName() {
-            return in->new ResetBlock(in.getLocation());
+        public BiFunction<BasicLocation, Location, ResetBlock> loadName() {
+            return (in,loc)->new ResetBlock(loc);
         }
 
         @Override
